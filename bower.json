@@ -1,0 +1,22 @@
+{
+  "name": "gulp-boiler-plate",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ebrengle/gulp-boiler-plate",
+  "authors": [
+    "Eric Brengle <eric.brengle@gmail.com>"
+  ],
+  "description": "A basic boiler plate setup for a web development project using gulp.",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.5",
+    "fontawesome": "~4.3.0"
+  }
+}
