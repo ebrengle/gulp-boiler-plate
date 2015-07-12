@@ -8,6 +8,7 @@ var gulp             = require('gulp');
 var browserSync      = require('browser-sync').create();
 var reload           = browserSync.reload;
 var del              = require('del');
+var watch            = require('gulp-watch');
 var runSequence      = require('run-sequence');
 
 //CSS Plugins
@@ -72,33 +73,32 @@ gulp.task('js', function () {
 
 
 // Watch files for changes
-gulp.task('watch', ['browser-sync'], function() {
+gulp.task('watch', function() {
     // Watch HTML files
-    gulp.watch('app/*.html', reload);
+    gulp.watch('./app/*.html', ['html'], browserSync.reload);
     // Watch Sass files
-    gulp.watch('app/scss/**/*', ['sass']);
+    gulp.watch('./app/sass/**/*.scss', ['sass'], browserSync.reload);
     // Watch JS files
-    gulp.watch('app/js/**/*', ['js']);
+    gulp.watch('./app/js/**/*', ['js'], browserSync.reload);
     // Watch image files
-    gulp.watch('app/img/*', ['images']);
+    gulp.watch('./app/img/*', ['image'], browserSync.reload);
 });
 
-// gulp.task('browser-sync', function() {
-//     browserSync.init({
-//         server: {
-//             baseDir: "./public"
-//         }
-//     });
-// });
+gulp.task('browser-sync', ['watch'], function() {
+    browserSync.init({
+        server: {
+            baseDir: "./public"
+        }
+    });
+});
 
 
 gulp.task('defualt');
-gulp.task('build', function(callback) {
+gulp.task('build', [], function(callback) {
   runSequence('clean',
               'sass',
               'html',
               'js',
               'image');
 });
-
 
