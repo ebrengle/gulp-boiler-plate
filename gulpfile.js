@@ -72,7 +72,7 @@ gulp.task('js', function () {
 });
 
 
-// Watch files for changes
+// Watch files for changes and rebuild public folder directory
 gulp.task('watch', function() {
     // Watch HTML files
     gulp.watch('./app/*.html', ['html'], browserSync.reload);
@@ -84,16 +84,20 @@ gulp.task('watch', function() {
     gulp.watch('./app/img/*', ['image'], browserSync.reload);
 });
 
-gulp.task('browser-sync', ['watch'], function() {
+
+//Browser Sync Server
+gulp.task('serve', ['watch'], function() {
     browserSync.init({
         server: {
             baseDir: "./public"
         }
     });
+    gulp.watch("./public/**/*").on("change", browserSync.reload);
 });
 
 
-gulp.task('defualt');
+//Build Function
+//Run to add new files to watch tasks.
 gulp.task('build', [], function(callback) {
   runSequence('clean',
               'sass',
